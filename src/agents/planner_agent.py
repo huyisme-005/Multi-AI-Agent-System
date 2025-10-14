@@ -1,5 +1,6 @@
 # planner_agent.py
 
+import numpy
 import pandas as pd
 import json
 import re
