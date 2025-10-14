@@ -229,7 +229,7 @@ Instructions:
 - Return JSON with keys: answer, reasoning, confidence
 """
 
-    response = ollama.chat(model="gemma3:4b", messages=[{"role": "user", "content": planner_prompt}])
+    response = ollama.chat(model="gemma3:4b", messages=[{"role": "user", "content": planner_prompt}], stream=False)
     raw_output = clean_llm_json(response["message"]["content"].strip())
 
     try:
