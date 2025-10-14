@@ -72,9 +72,9 @@ def extract_tickers(text: str) -> list[str]:
 def fetch_stock_data(ticker: str) -> DirectAnswer:
     try:
         stock = yf.Ticker(ticker)
-        fast = stock.fast_info
+        info = stock.info
 
-        if not fast or fast.get("lastPrice") is None:
+        if not info or info.get("lastPrice") is None:
             return DirectAnswer(
                 answer={},
                 reasoning=f"No financial data found for ticker '{ticker}' (possibly invalid or delisted)",
@@ -83,14 +83,14 @@ def fetch_stock_data(ticker: str) -> DirectAnswer:
 
         key_data = {
             "symbol": ticker.upper(),
-            "lastPrice": fast.get("lastPrice"),
-            "marketCap": fast.get("marketCap"),
-            "yearHigh": fast.get("yearHigh"),
-            "yearLow": fast.get("yearLow"),
-            "sharesOutstanding": fast.get("sharesOutstanding"),
+            "lastPrice": info.get("lastPrice"),
+            "marketCap": info.get("marketCap"),
+            "yearHigh": info.get("yearHigh"),
+            "yearLow": info.get("yearLow"),
+            "sharesOutstanding": info.get("sharesOutstanding"),
         }
 
-        return DirectAnswer(answer=key_data, reasoning=f"Fetched Yahoo Finance fast_info data for ticker '{ticker}'.", confidence=0.95)
+        return DirectAnswer(answer=key_data, reasoning=f"Fetched Yahoo Finance info data for ticker '{ticker}'.", confidence=0.95)
 
     except Exception as e:
         return DirectAnswer(
