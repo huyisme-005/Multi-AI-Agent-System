@@ -7,3 +7,4 @@ beautifulsoup4==4.10.0
 serpapi==0.1.0
 python-dotenv==0.19.2
 numpy
+google-search-results
